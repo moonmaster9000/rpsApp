@@ -1,0 +1,9 @@
+{
+  "name": "rps",
+  "version": "0.0.0",
+  "main": "src/rps.js",
+  "files": ["src/"],
+  "devDependencies": {
+    "jasmine-node": "latest"
+  }
+}
