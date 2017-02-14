@@ -12,6 +12,6 @@
     "babel-preset-react": "latest"
   },
   "scripts": {
-    "compile": "browserify main.js -o compiled_main.js -t [ babelify --presets [ es2015 react ] ]"
+    "compile": "browserify main.js -o bundled/compiled_main.js -t [ babelify --presets [ es2015 react ] ]"
   }
 }
