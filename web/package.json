@@ -9,7 +9,8 @@
   "devDependencies": {
     "babelify": "latest",
     "babel-preset-es2015": "latest",
-    "babel-preset-react": "latest"
+    "babel-preset-react": "latest",
+    "jasmine": "latest"
   },
   "scripts": {
     "compile": "browserify main.js -o bundled/compiled_main.js -t [ babelify --presets [ es2015 react ] ]"
