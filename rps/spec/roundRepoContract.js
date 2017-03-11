@@ -1,11 +1,11 @@
 const Round = require("../src/Round")
 
-function roundRepoContract(roundRepoClass){
+function roundRepoContract(repoFactoryClass){
     describe("Round Repo Contract", function () {
         let repo
 
         beforeEach(function () {
-            repo = new roundRepoClass()
+            repo = new repoFactoryClass().roundRepo()
         })
 
         it("saves rounds", function () {

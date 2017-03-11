@@ -1,22 +1,22 @@
-const { play, ValidationError } = require("../src/rps")
-const FakeRoundRepo = require("./../src/FakeRoundRepo")
+const {UseCaseFactory, ValidationError} = require("../src/rps")
+const FakeRepoFactory = require("./../src/FakeRepoFactory")
 
 describe("play", function () {
     const ROCK = "rock"
     const PAPER = "paper"
     const SCISSORS = "scissors"
 
-    let ui, repo
+    let ui, useCases
 
     function makeSpy(spyFun){
         ui = jasmine.createSpyObj("uiSpy", [spyFun])
-        repo = new FakeRoundRepo()
+        useCases = new UseCaseFactory(new FakeRepoFactory())
     }
 
     it("rock v. rock", function () {
         makeSpy("tie")
 
-        play(ROCK, ROCK, ui, repo)
+        useCases.play(ROCK, ROCK, ui)
 
         expect(ui.tie).toHaveBeenCalled()
     })
@@ -24,7 +24,7 @@ describe("play", function () {
     it("paper v. rock", function () {
         makeSpy("p1Wins")
 
-        play(PAPER, ROCK, ui, repo)
+        useCases.play(PAPER, ROCK, ui)
 
         expect(ui.p1Wins).toHaveBeenCalled()
     })
@@ -32,7 +32,7 @@ describe("play", function () {
     it("rock v. paper", function () {
         makeSpy("p2Wins")
 
-        play(ROCK, PAPER, ui, repo)
+        useCases.play(ROCK, PAPER, ui)
 
         expect(ui.p2Wins).toHaveBeenCalled()
     })
@@ -40,7 +40,7 @@ describe("play", function () {
     it("scissors v. paper", function () {
         makeSpy("p1Wins")
 
-        play(SCISSORS, PAPER, ui, repo)
+        useCases.play(SCISSORS, PAPER, ui)
 
         expect(ui.p1Wins).toHaveBeenCalled()
     })
@@ -48,7 +48,7 @@ describe("play", function () {
     it("paper v. scissors", function () {
         makeSpy("p2Wins")
 
-        play(PAPER, SCISSORS, ui, repo)
+        useCases.play(PAPER, SCISSORS, ui)
 
         expect(ui.p2Wins).toHaveBeenCalled()
     })
@@ -56,7 +56,7 @@ describe("play", function () {
     it("rock v. scissors", function () {
         makeSpy("p1Wins")
 
-        play(ROCK, SCISSORS, ui, repo)
+        useCases.play(ROCK, SCISSORS, ui)
 
         expect(ui.p1Wins).toHaveBeenCalled()
     })
@@ -64,7 +64,7 @@ describe("play", function () {
     it("scissors v. rock", function () {
         makeSpy("p2Wins")
 
-        play(SCISSORS, ROCK, ui, repo)
+        useCases.play(SCISSORS, ROCK, ui)
 
         expect(ui.p2Wins).toHaveBeenCalled()
     })
@@ -72,7 +72,7 @@ describe("play", function () {
     it("sailboat v. rock", function () {
         makeSpy("invalid")
 
-        play("sailboat", ROCK, ui, repo)
+        useCases.play("sailboat", ROCK, ui)
 
         expect(ui.invalid).toHaveBeenCalledWith([new ValidationError("p1", "invalidThrow")])
     })
@@ -80,7 +80,7 @@ describe("play", function () {
     it("rock v. sailboat", function(){
         makeSpy("invalid")
 
-        play(ROCK, "sailboat", ui, repo)
+        useCases.play(ROCK, "sailboat", ui)
 
         expect(ui.invalid).toHaveBeenCalledWith([new ValidationError("p2", "invalidThrow")])
     })

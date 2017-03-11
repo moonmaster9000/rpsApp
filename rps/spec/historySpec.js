@@ -1,24 +1,22 @@
-const { play } = require("../src/rps")
-const history = require("../src/history")
+const {UseCaseFactory} = require("../src/rps")
 const Round = require("../src/Round")
-const FakeRoundRepo = require("./../src/FakeRoundRepo")
+const FakeRepoFactory = require("./../src/FakeRepoFactory")
 
 describe("history", function () {
-    let ui, repo
+    let ui, useCases
 
     beforeEach(function () {
         ui = jasmine.createSpyObj("ui", ["norounds", "p2Wins", "rounds", "tie", "invalid", "p1Wins"])
-        repo = new FakeRoundRepo()
-
+        useCases = new UseCaseFactory(new FakeRepoFactory())
     })
 
     it("given folks have played before", function(){
-        play("rock", "paper", ui, repo)
-        play("paper", "paper", ui, repo)
-        play("scissors", "paper", ui, repo)
-        play("sailboat", "paper", ui, repo)
+        useCases.play("rock", "paper", ui)
+        useCases.play("paper", "paper", ui)
+        useCases.play("scissors", "paper", ui)
+        useCases.play("sailboat", "paper", ui)
 
-        history(ui, repo)
+        useCases.history(ui)
 
         expect(ui.rounds).toHaveBeenCalledWith([
             new Round("rock", "paper", "p2"),
@@ -29,7 +27,7 @@ describe("history", function () {
     })
 
     it("given no one has played before", function () {
-        history(ui, repo)
+        useCases.history(ui)
 
         expect(ui.norounds).toHaveBeenCalled()
     })

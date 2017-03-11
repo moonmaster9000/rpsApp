@@ -1,4 +1,4 @@
 const playRepoContract = require("./roundRepoContract")
-const FakeRoundRepo = require("./../src/FakeRoundRepo")
+const FakeRepoFactory = require("./../src/FakeRepoFactory")
 
-playRepoContract(FakeRoundRepo)
+playRepoContract(FakeRepoFactory)

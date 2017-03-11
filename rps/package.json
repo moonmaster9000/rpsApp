@@ -4,6 +4,6 @@
   "main": "src/rps.js",
   "files": ["src/"],
   "devDependencies": {
-    "jasmine-node": "latest"
+    "jasmine": "latest"
   }
 }

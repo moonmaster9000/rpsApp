@@ -1,7 +1,17 @@
 const {play, ValidationError} = require("./play")
 const history = require("./history")
-const FakeRoundRepo = require("./FakeRoundRepo")
+
+function UseCaseFactory(repoFactory){
+    this.play = function(p1, p2, ui){
+        play(p1, p2, ui, repoFactory.roundRepo())
+    }
+
+    this.history = function(ui){
+        history(ui, repoFactory.roundRepo())
+    }
+}
 
 module.exports = {
-    play, ValidationError, FakeRoundRepo, history
+    UseCaseFactory,
+    ValidationError,
 }
