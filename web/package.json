@@ -13,6 +13,7 @@
     "jasmine": "latest"
   },
   "scripts": {
-    "compile": "browserify main.js -o bundled/compiled_main.js -t [ babelify --presets [ es2015 react ] ]"
+    "compile": "browserify main.js -o bundled/compiled_main.js -t [ babelify --presets [ es2015 react ] ]",
+    "compile-test": "browserify spec/testSpec.js -o bundled/compiled_test.js -t [ babelify --presets [ es2015 react ] ]"
   }
 }
