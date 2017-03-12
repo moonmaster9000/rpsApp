@@ -4,11 +4,6 @@ function play(p1, p2, ui, repo){
     new RoundUseCase(p1, p2, ui, repo).execute()
 }
 
-function ValidationError(field, errorCode){
-    this.field = field
-    this.errorCode = errorCode
-}
-
 function RoundUseCase(p1, p2, ui, repo){
     this.execute = function(){
         checkInvalid()     &&
@@ -38,19 +33,11 @@ function RoundUseCase(p1, p2, ui, repo){
     }
 
     function checkInvalid(){
-        let validationErrors = []
-
-        if (invalid(p1))
-            validationErrors.push(new ValidationError("p1", "invalidThrow"))
-
-        if (invalid(p2))
-            validationErrors.push(new ValidationError("p2", "invalidThrow"))
-
-        if (validationErrors.length === 0){
-            return true
-        } else {
+        if (invalid(p1) || invalid(p2)){
             repo.save(new Round(p1, p2, "invalid"))
-            ui.invalid(validationErrors)
+            ui.invalid()
+        } else {
+            return true
         }
     }
 
@@ -71,7 +58,4 @@ function RoundUseCase(p1, p2, ui, repo){
     }
 }
 
-module.exports = {
-    play,
-    ValidationError
-}
+module.exports = play
