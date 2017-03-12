@@ -4,19 +4,23 @@ const {play, history} = require("rps")
 const RPSApp = React.createClass({
     getInitialState() {
         return {
-            errors: [],
+            errors: null,
             winner: null,
             rounds: <h1>no rounds</h1>
         }
     },
 
-    getRoundRepo: function () {
-        return this.props.roundRepo;
+    useCases: function() {
+        return this.props.useCases  
+    },
+
+    componentWillMount: function(){
+        this.useCases().history(this)
     },
 
     submitRound(e){
         e.preventDefault()
-        play(this.state.p1, this.state.p2, this, this.getRoundRepo())
+        this.useCases().play(this.state.p1, this.state.p2, this)
     },
 
     p1Changed(e){
@@ -27,13 +31,13 @@ const RPSApp = React.createClass({
         this.setState({p2: e.target.value})
     },
 
-    invalid(errors){
-        history(this, this.getRoundRepo())
-        this.setState({errors})
+    invalid(){
+        this.useCases().history(this)
+        this.setState({errors: "INVALID INPUT", winner: null})
     },
 
     clearErrors() {
-        this.setState({errors: []})
+        this.setState({errors: null})
     },
 
     assignWinner: function (winner) {
@@ -42,17 +46,17 @@ const RPSApp = React.createClass({
     },
 
     p1Wins(){
-        history(this, this.getRoundRepo())
+        this.useCases().history(this)
         this.assignWinner("p1")
     },
 
     p2Wins(){
-        history(this, this.getRoundRepo())
+        this.useCases().history(this)
         this.assignWinner("player two")
     },
 
     tie(){
-        history(this, this.getRoundRepo())
+        this.useCases().history(this)
         this.clearErrors()
         this.setState({winner: <h1>TIE</h1>})
     },
@@ -67,9 +71,7 @@ const RPSApp = React.createClass({
     },
 
     renderErrors() {
-        return <ul>
-            {this.state.errors.map((error) => <li>{error.field} - {error.errorCode}</li>)}
-        </ul>
+        return <h1>{this.state.errors}</h1>
     },
 
     render() {
@@ -81,7 +83,7 @@ const RPSApp = React.createClass({
             <form onSubmit={this.submitRound}>
                 <input type="text" name="p1" onChange={this.p1Changed}/>
                 <input type="text" name="p2" onChange={this.p2Changed}/>
-                <input type="submit" value="Play"/>
+                <input id="playButton" type="submit" value="Play"/>
             </form>
 
             <ul>
