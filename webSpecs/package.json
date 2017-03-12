@@ -1,0 +1,12 @@
+{
+  "name": "webSpecs",
+  "version": "0.0.0",
+  "files": ["src/"],
+  "main": "src/WebSpecs.js",
+  "dependencies": {
+    "jasmine": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "rps": "file:../rps"
+  }
+}

@@ -10,7 +10,7 @@
     "babelify": "latest",
     "babel-preset-es2015": "latest",
     "babel-preset-react": "latest",
-    "jasmine": "latest"
+    "webSpecs": "file:../webSpecs"
   },
   "scripts": {
     "compile": "browserify main.js -o bundled/compiled_main.js -t [ babelify --presets [ es2015 react ] ]",
