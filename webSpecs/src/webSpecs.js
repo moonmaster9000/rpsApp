@@ -3,7 +3,7 @@ const ReactDOM = require("react-dom")
 
 const {Round} = require("rps")
 
-function webSpecs(RPSApp){
+function webSpecs(reactAppFactory){
     describe("play", function () {
         describe("when the play use case fails validations", function () {
             beforeEach(function () {
@@ -91,13 +91,13 @@ function webSpecs(RPSApp){
             useCases.play    = useCases.play    || function(){}
 
             ReactDOM.render(
-                React.createElement(RPSApp, { useCases }),
+                reactAppFactory(useCases),
                 document.getElementById("reactApp")
             )
         }
 
-        const P1_WINS = "p1 wins"
-        const P2_WINS = "player two wins"
+        const P1_WINS = "P1 WINS"
+        const P2_WINS = "P2 WINS"
         const TIE     = "TIE"
         const INVALID = "INVALID"
 

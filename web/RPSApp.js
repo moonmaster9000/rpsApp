@@ -33,7 +33,7 @@ const RPSApp = React.createClass({
 
     invalid(){
         this.useCases().history(this)
-        this.setState({errors: "INVALID INPUT", winner: null})
+        this.setState({errors: "INVALID", winner: null})
     },
 
     clearErrors() {
@@ -42,17 +42,17 @@ const RPSApp = React.createClass({
 
     assignWinner: function (winner) {
         this.clearErrors()
-        this.setState({winner: <h1>{winner} wins!</h1>})
+        this.setState({winner: <h1>{winner} WINS!</h1>})
     },
 
     p1Wins(){
         this.useCases().history(this)
-        this.assignWinner("p1")
+        this.assignWinner("P1")
     },
 
     p2Wins(){
         this.useCases().history(this)
-        this.assignWinner("player two")
+        this.assignWinner("P2")
     },
 
     tie(){
