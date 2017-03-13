@@ -54,7 +54,7 @@ function webSpecs(reactAppFactory){
                 })
             })
 
-            it("tells the user P2 Wins!", function () {
+            it("tells the user TIE!", function () {
                 expect(page()).not.toContain(TIE)
                 play()
                 expect(page()).toContain(TIE)
