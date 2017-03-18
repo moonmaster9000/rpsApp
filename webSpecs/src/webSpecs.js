@@ -62,19 +62,22 @@ function webSpecs(reactAppFactory){
         })
 
         describe("when the history returns results", function () {
+            let round
+
             beforeEach(function () {
+                round = new Round("p1's Throw", "p2's Throw", "round winner")
+
                 renderApp({
-                    history: ui=>ui.rounds([new Round("rock", "paper", "p1")])
+                    history: ui=>ui.rounds([round])
                 })
             })
 
             it("shows those rounds on the page", function () {
                 play()
-                expect(page()).toContain("rock")
-                expect(page()).toContain("paper")
-                expect(page()).toContain("p1")
+                expect(page()).toContain(round.p1Throw)
+                expect(page()).toContain(round.p2Throw)
+                expect(page()).toContain(round.winner)
             })
-
         })
 
         function page() {

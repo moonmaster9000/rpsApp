@@ -9,12 +9,12 @@ function roundRepoContract(repoFactoryClass) {
         })
 
         it("saves rounds", function (done) {
-            let play = new Round("rock", "rock", "tie")
+            let round = new Round()
 
-            repo.save(play)
+            repo.save(round)
                 .then(()=>repo.getAll())
                 .then(rounds=> {
-                    expect(rounds).toContain(play)
+                    expect(rounds).toContain(round)
                     done()
                 })
         })
