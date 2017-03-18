@@ -1,9 +1,15 @@
-function history(ui, repo){
-    if (repo.empty()){
-        ui.norounds()
-    } else {
-        ui.rounds(repo.getAll())
-    }
+function history(ui, repo) {
+    repo.empty()
+        .then((isEmpty)=> {
+            if (isEmpty) {
+                ui.norounds()
+            } else {
+                repo.getAll()
+                    .then((rounds)=> {
+                        ui.rounds(rounds)
+                    })
+            }
+        })
 }
 
 module.exports = history

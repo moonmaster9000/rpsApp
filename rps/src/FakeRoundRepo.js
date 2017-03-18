@@ -3,14 +3,15 @@ function FakeRoundRepo(){
 
     this.save = function(play){
         rounds.push(play)
+        return Promise.resolve()
     }
 
     this.empty = function(){
-        return rounds.length === 0
+        return Promise.resolve(rounds.length === 0)
     }
 
     this.getAll = function(){
-        return rounds
+        return Promise.resolve(rounds)
     }
 }
 

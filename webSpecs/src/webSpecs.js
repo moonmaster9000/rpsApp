@@ -77,7 +77,6 @@ function webSpecs(reactAppFactory){
 
         })
 
-
         function page() {
             return document.getElementById("reactApp").innerText;
         }

@@ -1,6 +1,6 @@
 const Round = require("../src/Round")
 
-function roundRepoContract(repoFactoryClass){
+function roundRepoContract(repoFactoryClass) {
     describe("Round Repo Contract", function () {
         let repo
 
@@ -8,25 +8,34 @@ function roundRepoContract(repoFactoryClass){
             repo = new repoFactoryClass().roundRepo()
         })
 
-        it("saves rounds", function () {
+        it("saves rounds", function (done) {
             let play = new Round("rock", "rock", "tie")
 
             repo.save(play)
-
-            expect(repo.getAll()).toContain(play)
+                .then(()=>repo.getAll())
+                .then(rounds=> {
+                    expect(rounds).toContain(play)
+                    done()
+                })
         })
 
         describe("when there are no rounds", function () {
             it("is empty", function () {
-                expect(repo.empty()).toBeTruthy()
+                repo.empty()
+                    .then((isEmpty)=> {
+                        expect(isEmpty).toBe(true)
+                    })
             })
         })
 
         describe("when there are rounds", function () {
-            it("is not empty", function () {
+            it("is not empty", function (done) {
                 repo.save(new Round())
-
-                expect(repo.empty()).toBeFalsy()
+                    .then(()=>repo.empty())
+                    .then((isEmpty)=> {
+                        expect(isEmpty).toBeFalsy()
+                        done()
+                    })
             })
         })
     })
