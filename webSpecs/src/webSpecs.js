@@ -73,7 +73,6 @@ function webSpecs(reactAppFactory){
             })
 
             it("shows those rounds on the page", function () {
-                play()
                 expect(page()).toContain(round.p1Throw)
                 expect(page()).toContain(round.p2Throw)
                 expect(page()).toContain(round.winner)
