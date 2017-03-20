@@ -20,22 +20,22 @@ let RPSApp = React.createClass({
 
     tie(){
         this.props.dispatch({type: 'TIE'})
-        this.props.useCases.history(historyObserver)
+        this.props.useCases.history(this)
     },
 
     p2Wins(){
         this.props.dispatch({type: 'P2_WINS'})
-        this.props.useCases.history(historyObserver)
+        this.props.useCases.history(this)
     },
 
     p1Wins(){
         this.props.dispatch({type: 'P1_WINS'})
-        this.props.useCases.history(historyObserver)
+        this.props.useCases.history(this)
     },
 
     invalid(){
         this.props.dispatch({type: 'INVALID'})
-        this.props.useCases.history(historyObserver)
+        this.props.useCases.history(this)
     },
 
     handleP1InputChange (e) {
@@ -50,7 +50,7 @@ let RPSApp = React.createClass({
 
     submitHandler (e) {
         e.preventDefault()
-        this.props.useCases.play(p1, p2, this)
+        this.props.useCases.play(this.props.p1, this.props.p2, this)
     },
 
     render(){
@@ -58,8 +58,8 @@ let RPSApp = React.createClass({
             {this.props.gameResult}
 
             <form onSubmit={this.submitHandler}>
-                <input type="text" name="p1" onChange={this.handleP1InputChange}/>
-                <input type="text" name="p2" onChange={this.handleP2InputChange}/>
+                <input type="text" name="p1" id="p1ThrowInput" onChange={this.handleP1InputChange}/>
+                <input type="text" name="p2" id="p2ThrowInput" onChange={this.handleP2InputChange}/>
 
                 <input id="playButton" type="submit" value="PLAY"/>
             </form>
@@ -68,73 +68,6 @@ let RPSApp = React.createClass({
         </div>
     }
 })
-
-// let RPSApp = ({
-//     //mapStateToProps
-//     roundHistory,
-//     gameResult,
-//     p1,
-//     p2,
-//
-//     dispatch,
-//     useCases
-// }) => {
-//     const historyObserver = {
-//         rounds(rs){
-//             dispatch({type: 'ROUNDS', rounds: rs})
-//         }
-//     }
-//
-//     const playObserver = {
-//         tie(){
-//             dispatch({type: 'TIE'})
-//             useCases.history(historyObserver)
-//         },
-//
-//         p2Wins(){
-//             dispatch({type: 'P2_WINS'})
-//             useCases.history(historyObserver)
-//         },
-//
-//         p1Wins(){
-//             dispatch({type: 'P1_WINS'})
-//             useCases.history(historyObserver)
-//         },
-//
-//         invalid(){
-//             dispatch({type: 'INVALID'})
-//             useCases.history(historyObserver)
-//         }
-//     }
-//
-//     const handleP1InputChange = function (e) {
-//         e.preventDefault()
-//         dispatch({type: 'P1_CHANGED', text: e.target.value})
-//     }
-//
-//     const handleP2InputChange = function (e) {
-//         e.preventDefault()
-//         dispatch({type: 'P2_CHANGED', text: e.target.value})
-//     }
-//
-//     let submitHandler = (e) => {
-//         e.preventDefault()
-//         useCases.play(p1, p2, playObserver)
-//     }
-//
-//     return <div>
-//         {gameResult}
-//
-//         <form onSubmit={submitHandler}>
-//             <input type="text" name="p1" onChange={handleP1InputChange}/>
-//             <input type="text" name="p2" onChange={handleP2InputChange}/>
-//
-//             <input id="playButton" type="submit" value="PLAY"/>
-//         </form>
-//
-//         {roundHistory}
-//     </div>
-// }
 
 function mapStateToProps(state) {
     return state

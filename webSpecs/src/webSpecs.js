@@ -1,14 +1,33 @@
 const React = require("react")
 const ReactDOM = require("react-dom")
+const ReactTestUtils = require("react-addons-test-utils")
 
 const {Round} = require("rps")
 
-function webSpecs(reactAppFactory){
+function webSpecs(reactAppFactory) {
     describe("play", function () {
+        it("sends the text inputs for p1 and p2 throws to the play function", function (done) {
+            const playSpy = jasmine.createSpy("play")
+
+            renderApp({play: playSpy})
+
+            const p1 = "p1 throw"
+            const p2 = "p2 throw"
+
+            play(p1, p2)
+
+            setTimeout(()=>{
+                expect(playSpy.calls.mostRecent().args).toContain(p1, p2)
+                done()
+            }, 0)
+        })
+
         describe("when the play use case fails validations", function () {
             beforeEach(function () {
                 renderApp({
-                    play: function(p1, p2, ui){ ui.invalid() }
+                    play: function (p1, p2, ui) {
+                        ui.invalid()
+                    }
                 })
             })
 
@@ -22,7 +41,9 @@ function webSpecs(reactAppFactory){
         describe("when the play use case reports p1 wins", function () {
             beforeEach(function () {
                 renderApp({
-                    play: function(p1, p2, ui){ ui.p1Wins() }
+                    play: function (p1, p2, ui) {
+                        ui.p1Wins()
+                    }
                 })
             })
 
@@ -36,7 +57,9 @@ function webSpecs(reactAppFactory){
         describe("when the play use case reports p2 wins", function () {
             beforeEach(function () {
                 renderApp({
-                    play: function(p1, p2, ui){ ui.p2Wins() }
+                    play: function (p1, p2, ui) {
+                        ui.p2Wins()
+                    }
                 })
             })
 
@@ -50,7 +73,9 @@ function webSpecs(reactAppFactory){
         describe("when the play use case reports tie", function () {
             beforeEach(function () {
                 renderApp({
-                    play: function(p1, p2, ui){ ui.tie() }
+                    play: function (p1, p2, ui) {
+                        ui.tie()
+                    }
                 })
             })
 
@@ -83,8 +108,20 @@ function webSpecs(reactAppFactory){
             return document.getElementById("reactApp").innerText;
         }
 
-        function play() {
-            document.getElementById("playButton").click()
+        function play(p1, p2) {
+            setInputValue("p1ThrowInput", p1)
+            setInputValue("p2ThrowInput", p2)
+            click("playButton")
+        }
+
+        function setInputValue(id, value){
+            const input = document.getElementById(id)
+            input.value = value
+            ReactTestUtils.Simulate.change(input)
+        }
+
+        function click(id) {
+            document.getElementById(id).click()
         }
 
         function renderApp(useCases) {
@@ -99,7 +136,7 @@ function webSpecs(reactAppFactory){
 
         const P1_WINS = "P1 WINS"
         const P2_WINS = "P2 WINS"
-        const TIE     = "TIE"
+        const TIE = "TIE"
         const INVALID = "INVALID"
 
         afterEach(function () {

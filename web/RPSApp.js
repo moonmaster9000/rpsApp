@@ -81,8 +81,8 @@ const RPSApp = React.createClass({
             {this.state.winner}
 
             <form onSubmit={this.submitRound}>
-                <input type="text" name="p1" onChange={this.p1Changed}/>
-                <input type="text" name="p2" onChange={this.p2Changed}/>
+                <input type="text" name="p1" id="p1ThrowInput" onChange={this.p1Changed}/>
+                <input type="text" name="p2" id="p2ThrowInput" onChange={this.p2Changed}/>
                 <input id="playButton" type="submit" value="Play"/>
             </form>
 

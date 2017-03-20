@@ -1,18 +1,9 @@
 const React = require("react")
 const ReactDOM = require("react-dom")
-const Reflux = require("reflux")
-
-class App extends Reflux.Component{
-    constructor(props){
-        super(props)
-    }
-
-    render(){
-        return <p>Hello World!</p>
-    }
-}
+const RPSApp = require("./RPSApp")
+const { UseCaseFactory, FakeRepoFactory } = require("rps")
 
 ReactDOM.render(
-    <App/>,
+    <RPSApp useCases={new UseCaseFactory(new FakeRepoFactory())}/>,
     document.getElementById("app")
 )
