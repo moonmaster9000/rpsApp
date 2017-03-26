@@ -1,0 +1,25 @@
+{
+  "name": "angularWeb",
+  "version": "0.0.0",
+  "dependencies": {
+    "rps": "file:../rps",
+    "@angular/core" : "4.0.0",
+    "@angular/compiler": "4.0.0",
+    "@angular/common" : "4.0.0",
+    "@angular/platform-browser": "4.0.0",
+      "rxjs": "^5.0.1",
+      "zone.js": "^0.8.4",
+      "reflect-metadata": "latest",
+    "@angular/platform-browser-dynamic": "4.0.0",
+    "@angular/forms": "4.0.0"
+  },
+  "devDependencies": {
+    "webSpecs": "../webSpecs",
+    "babelify": "latest",
+    "babel-preset-es2015": "latest"
+  },
+  "scripts": {
+    "compile": "browserify -o bundled/compiled_main.js main.js -t [ babelify --presets [ es2015 ] ]",
+    "compile-test": "browserify -o bundled/compiled_test.js spec/RPSAppSpec.js -t [ babelify --presets [ es2015 ] ]"
+  }
+}

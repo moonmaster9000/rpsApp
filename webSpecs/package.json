@@ -5,9 +5,6 @@
   "main": "src/WebSpecs.js",
   "dependencies": {
     "jasmine": "latest",
-    "react": "latest",
-    "react-dom": "latest",
-    "rps": "file:../rps",
-    "react-addons-test-utils": "latest"
+    "rps": "file:../rps"
   }
 }

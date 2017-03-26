@@ -1,5 +1,13 @@
 const webSpecs = require("webSpecs")
 const RPSApp = require("../RPSApp")
 const React = require("react")
+const ReactDOM = require("react-dom")
 
-webSpecs((useCases) => <RPSApp useCases={useCases}/>)
+function appNode(){
+    return document.getElementById("reactApp")
+}
+
+webSpecs(
+    (useCases) => ReactDOM.render(<RPSApp useCases={useCases}/>, appNode()),
+    () => { appNode().innerHTML = ""}
+)
