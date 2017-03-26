@@ -1,7 +1,13 @@
 const {Round} = require("rps")
+const Locale = require("rpsPresentationI18n")
 
 function webSpecs(mountApp, unmountApp) {
     describe("play", function () {
+        let locale
+
+        beforeEach(function () {
+            locale = new Locale()
+        })
 
         describe("given the user has entered throws", function () {
             let playSpy
@@ -32,9 +38,9 @@ function webSpecs(mountApp, unmountApp) {
             })
 
             it("tells the user the input is invalid", function () {
-                expect(page()).not.toContain(INVALID)
+                expect(page()).not.toContain(t("invalid"))
                 play()
-                expect(page()).toContain(INVALID)
+                expect(page()).toContain(t("invalid"))
             })
         })
 
@@ -48,9 +54,9 @@ function webSpecs(mountApp, unmountApp) {
             })
 
             it("tells the user P1 Wins!", function () {
-                expect(page()).not.toContain(P1_WINS)
+                expect(page()).not.toContain(t("p1_wins"))
                 play()
-                expect(page()).toContain(P1_WINS)
+                expect(page()).toContain(t("p1_wins"))
             })
         })
 
@@ -64,9 +70,9 @@ function webSpecs(mountApp, unmountApp) {
             })
 
             it("tells the user P2 Wins!", function () {
-                expect(page()).not.toContain(P2_WINS)
+                expect(page()).not.toContain(t("p2_wins"))
                 play()
-                expect(page()).toContain(P2_WINS)
+                expect(page()).toContain(t("p2_wins"))
             })
         })
 
@@ -80,9 +86,9 @@ function webSpecs(mountApp, unmountApp) {
             })
 
             it("tells the user TIE!", function () {
-                expect(page()).not.toContain(TIE)
+                expect(page()).not.toContain(t("tie"))
                 play()
-                expect(page()).toContain(TIE)
+                expect(page()).toContain(t("tie"))
             })
         })
 
@@ -125,6 +131,10 @@ function webSpecs(mountApp, unmountApp) {
             document.getElementById(id).click()
         }
 
+        function t(key){
+            return locale.t(key)
+        }
+
         function renderApp(useCases, done = ()=> {
         }) {
             useCases.history = useCases.history || function () {}
@@ -134,11 +144,6 @@ function webSpecs(mountApp, unmountApp) {
 
             setTimeout(done, 0)
         }
-
-        const P1_WINS = "P1 WINS"
-        const P2_WINS = "P2 WINS"
-        const TIE = "TIE"
-        const INVALID = "INVALID"
 
         afterEach(function () {
             unmountApp()

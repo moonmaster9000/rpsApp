@@ -1,0 +1,6 @@
+{
+  "name": "rpsPresentationI18n",
+  "files": ["src/"],
+  "main": "src/rpsPresentationI18n.js",
+  "version": "0.0.0"
+}

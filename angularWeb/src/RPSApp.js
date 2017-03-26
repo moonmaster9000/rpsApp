@@ -1,5 +1,6 @@
 const {Component} = require("@angular/core")
 const { UseCaseFactory } = require("rps")
+const Locale = require("rpsPresentationI18n")
 
 const RPSApp = Component({
     selector: "rps-app",
@@ -23,6 +24,7 @@ const RPSApp = Component({
         this.message = ""
         this.useCases = useCases
         this.history = []
+        this.locale = new Locale()
         this.updateHistory()
     }],
 
@@ -36,22 +38,22 @@ const RPSApp = Component({
     },
 
     invalid(){
-        this.message = "INVALID"
+        this.message = this.locale.t("invalid")
         this.updateHistory()
     },
 
     p1Wins(){
-        this.message = "P1 WINS"
+        this.message = this.locale.t("p1_wins")
         this.updateHistory()
     },
 
     p2Wins(){
-        this.message = "P2 WINS"
+        this.message = this.locale.t("p2_wins")
         this.updateHistory()
     },
 
     tie(){
-        this.message = "TIE"
+        this.message = this.locale.t("tie")
         this.updateHistory()
     },
 

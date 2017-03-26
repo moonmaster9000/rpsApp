@@ -6,7 +6,8 @@
     "react-dom": "latest",
     "react-redux": "latest",
     "redux": "latest",
-    "rps": "file:../rps"
+    "rps": "file:../rps",
+    "rpsPresentationI18n": "file:../rpsPresentationI18n"
   },
   "devDependencies": {
     "babelify": "latest",

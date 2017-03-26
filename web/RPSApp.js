@@ -1,5 +1,8 @@
 const React = require("react")
 const {play, history} = require("rps")
+const Locale = require("rpsPresentationI18n")
+
+const locale = new Locale()
 
 const RPSApp = React.createClass({
     getInitialState() {
@@ -33,7 +36,7 @@ const RPSApp = React.createClass({
 
     invalid(){
         this.useCases().history(this)
-        this.setState({errors: "INVALID", winner: null})
+        this.setState({errors: locale.t("invalid"), winner: null})
     },
 
     clearErrors() {
@@ -42,23 +45,23 @@ const RPSApp = React.createClass({
 
     assignWinner: function (winner) {
         this.clearErrors()
-        this.setState({winner: <h1>{winner} WINS!</h1>})
+        this.setState({winner: <h1>{locale.t(`${winner}_wins`)}</h1>})
     },
 
     p1Wins(){
         this.useCases().history(this)
-        this.assignWinner("P1")
+        this.assignWinner("p1")
     },
 
     p2Wins(){
         this.useCases().history(this)
-        this.assignWinner("P2")
+        this.assignWinner("p2")
     },
 
     tie(){
         this.useCases().history(this)
         this.clearErrors()
-        this.setState({winner: <h1>TIE</h1>})
+        this.setState({winner: <h1>{locale.t("tie")}</h1>})
     },
 
     norounds(){

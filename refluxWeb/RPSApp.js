@@ -1,5 +1,7 @@
 const React = require("react")
 const Reflux = require("reflux")
+const Locale = require("rpsPresentationI18n")
+const locale = new Locale()
 
 const invalidInputAction = Reflux.createAction()
 const p1WinsAction = Reflux.createAction()
@@ -23,19 +25,19 @@ class RPSAppStore extends Reflux.Store {
     }
 
     handleInvalidInput() {
-        this.setState({message: "INVALID"})
+        this.setState({message: locale.t("invalid")})
     }
 
     handleP1Wins() {
-        this.setState({message: "P1 WINS"})
+        this.setState({message: locale.t("p1_wins")})
     }
 
     handleP2Wins() {
-        this.setState({message: "P2 WINS"})
+        this.setState({message: locale.t("p2_wins")})
     }
 
     handleTie() {
-        this.setState({message: "TIE"})
+        this.setState({message: locale.t("tie")})
     }
 
     handleRoundsFound(rounds) {

@@ -3,6 +3,8 @@ const ReactDOM = require("react-dom")
 const {combineReducers} = require('redux')
 const {connect} = require('react-redux')
 
+const Locale = require("rpsPresentationI18n")
+
 let RoundHistory = ({rounds}) => {
     return <ul>
         {rounds.map((r) => <li>{r.p1Throw} {r.p2Throw} {r.winner}</li>)}
@@ -75,19 +77,10 @@ function mapStateToProps(state) {
 
 RPSApp = connect(mapStateToProps)(RPSApp)
 
-const gameResult = (state = 'NONE', action) => {
-    switch (action.type) {
-        case 'TIE':
-            return 'TIE GAME'
-        case 'P1_WINS':
-            return 'P1 WINS'
-        case 'P2_WINS':
-            return 'P2 WINS'
-        case 'INVALID':
-            return 'INVALID'
-        default:
-            return state
-    }
+const locale = new Locale()
+
+const gameResult = (state = 'NONE', action={type:""}) => {
+    return locale.t(action.type.toLowerCase()) || state
 }
 
 const p1 = (state = '', action) => {
