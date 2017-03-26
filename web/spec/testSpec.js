@@ -3,16 +3,17 @@ const ReactDOM = require("react-dom")
 const RPSApp = require("../RPSApp")
 const webSpecs = require("webSpecs")
 
-function reactAppDOMNode() {
-    return document.getElementById("reactApp");
-}
+webSpecs(
+    function () {
+        const div = document.createElement("div")
+        div.id = "reactApp"
+        return div
+    },
 
-webSpecs(function(useCases){
-    ReactDOM.render(
-        <RPSApp useCases={useCases}/>,
-        reactAppDOMNode()
-    )
-}, function(){
-    reactAppDOMNode().innerHTML=""
-})
-
+    function (useCases) {
+        ReactDOM.render(
+            <RPSApp useCases={useCases}/>,
+            document.getElementById("reactApp")
+        )
+    }
+)

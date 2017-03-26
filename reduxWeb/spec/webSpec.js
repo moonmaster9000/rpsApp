@@ -5,16 +5,19 @@ const {RPSApp, reducer} = require("../RPSApp")
 const React = require("react")
 const ReactDOM = require("react-dom")
 
-function appNode() {
-    return document.getElementById("reactApp")
-}
-
 webSpecs(
-    (useCases)=> {
-        ReactDOM.render(<Provider store={createStore(reducer)}>
-            <RPSApp useCases={useCases}/>
-        </Provider>, appNode())
+    () => {
+        const div = document.createElement("div")
+        div.id = "reactApp"
+        return div
     },
 
-    () => { appNode().innerHTML = "" }
+    (useCases)=> {
+        ReactDOM.render(
+            <Provider store={createStore(reducer)}>
+                <RPSApp useCases={useCases}/>
+            </Provider>,
+            document.getElementById("reactApp")
+        )
+    },
 )

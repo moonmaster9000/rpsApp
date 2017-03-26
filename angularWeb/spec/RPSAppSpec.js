@@ -8,6 +8,8 @@ const { UseCaseFactory } = require("rps")
 const webSpecs = require("webSpecs")
 
 webSpecs(
+    ()=> document.createElement("rps-app"),
+
     (useCases)=> {
         let RPSTestModule = NgModule({
             imports: [BrowserModule, FormsModule],
@@ -15,13 +17,9 @@ webSpecs(
             bootstrap: [RPSApp],
             providers: [{provide: UseCaseFactory, useValue: useCases}]
         }).Class({
-            constructor(){
-            }
+            constructor(){}
         })
 
         platformBrowserDynamic().bootstrapModule(RPSTestModule)
-    },
-    ()=> {
-        document.getElementsByTagName("rps-app")[0].innerHTML = ""
     }
 )

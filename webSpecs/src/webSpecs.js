@@ -1,13 +1,9 @@
 const {Round} = require("rps")
 const Locale = require("rpsPresentationI18n")
 
-function webSpecs(mountApp, unmountApp) {
+function webSpecs(createDOMFixture, mountApp) {
     describe("play", function () {
-        let locale
-
-        beforeEach(function () {
-            locale = new Locale()
-        })
+        let locale, fixture
 
         describe("given the user has entered throws", function () {
             let playSpy
@@ -145,8 +141,14 @@ function webSpecs(mountApp, unmountApp) {
             setTimeout(done, 0)
         }
 
+        beforeEach(function () {
+            locale = new Locale()
+            fixture = createDOMFixture()
+            document.getElementsByTagName("body")[0].appendChild(fixture)
+        })
+
         afterEach(function () {
-            unmountApp()
+            fixture.remove()
         })
     })
 }
