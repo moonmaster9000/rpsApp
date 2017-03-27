@@ -17,10 +17,13 @@
   "devDependencies": {
     "webSpecs": "../webSpecs",
     "babelify": "latest",
-    "babel-preset-es2015": "latest"
+    "babel-preset-es2015": "latest",
+    "karma": "^1.5.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-jasmine": "^1.1.0"
   },
   "scripts": {
     "compile": "browserify -o bundled/compiled_main.js main.js -t [ babelify --presets [ es2015 ] ]",
-    "compile-test": "browserify -o bundled/compiled_test.js spec/RPSAppSpec.js -t [ babelify --presets [ es2015 ] ]"
+    "compile-test": "browserify -o bundled/compiledSpec.js spec/RPSAppSpec.js -t [ babelify --presets [ es2015 ] ]"
   }
 }
