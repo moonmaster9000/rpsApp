@@ -6,22 +6,26 @@ function play(p1, p2, ui, repo){
 
 function RoundUseCase(p1, p2, ui, repo){
     this.execute = function(){
-        checkInvalid()     &&
-        checkTie()         &&
-        determineWinner()
-    }
-
-    function checkTie(){
-        if (tie()){
-            repo.save(new Round(p1, p2, "tie"))
-            ui.tie()
-            return false
+        if (invalid(p1) || invalid(p2)){
+            recordInvalidRound()
+        } else if (tie()){
+            recordTie()
+        } else {
+            recordWinner()
         }
-
-        return true
     }
 
-    function determineWinner(){
+    function recordInvalidRound() {
+        repo.save(new Round(p1, p2, "invalid"))
+        ui.invalid()
+    }
+
+    function recordTie() {
+        repo.save(new Round(p1, p2, "tie"))
+        ui.tie()
+    }
+
+    function recordWinner(){
         if (p1BeatsP2()){
             repo.save(new Round(p1, p2, "p1"))
             ui.p1Wins()
@@ -29,15 +33,6 @@ function RoundUseCase(p1, p2, ui, repo){
         else {
             repo.save(new Round(p1, p2, "p2"))
             ui.p2Wins()
-        }
-    }
-
-    function checkInvalid(){
-        if (invalid(p1) || invalid(p2)){
-            repo.save(new Round(p1, p2, "invalid"))
-            ui.invalid()
-        } else {
-            return true
         }
     }
 
