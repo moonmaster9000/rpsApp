@@ -49,7 +49,7 @@ function RoundUseCase(p1, p2, ui, repo){
     function p1BeatsP2() {
         return p1 === "paper" && p2 === "rock" ||
             p1 === "scissors" && p2 === "paper" ||
-            p1 === "rock" && p2 === "scissors";
+            p1 === "rock" && p2 === "scissors"
     }
 }
 
