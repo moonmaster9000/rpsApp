@@ -7,7 +7,7 @@ const Locale = require("rpsPresentationI18n")
 
 let RoundHistory = ({rounds}) => {
     return <ul>
-        {rounds.map((r) => <li>{r.p1Throw} {r.p2Throw} {r.winner}</li>)}
+        {rounds.map((r, i) => <li key={i}>{r.p1Throw} {r.p2Throw} {r.winner}</li>)}
     </ul>
 }
 

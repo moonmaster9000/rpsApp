@@ -69,7 +69,7 @@ const RPSApp = React.createClass({
 
     rounds(rs){
         this.setState({
-            rounds: rs.map((r) => <li>{r.p1Throw} {r.p2Throw} {r.winner}</li>)
+            rounds: rs.map((r, i) => <li key={i}>{r.p1Throw} {r.p2Throw} {r.winner}</li>)
         })
     },
 

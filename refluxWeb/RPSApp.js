@@ -92,7 +92,7 @@ class RPSApp extends Reflux.Component {
             </form>
 
             <ul>
-                {this.state.rounds.map((r) => <li>{r.p1Throw} {r.p2Throw} {r.winner}</li>)}
+                {this.state.rounds.map((r, i) => <li key={i}>{r.p1Throw} {r.p2Throw} {r.winner}</li>)}
             </ul>
         </div>
     }
