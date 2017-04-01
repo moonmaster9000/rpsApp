@@ -1,5 +1,14 @@
 const Round = require("../src/Round")
 
+function testAsync(asyncFun) {
+    return (done) => {
+        asyncFun().then(done, e=> {
+            fail(e);
+            done();
+        })
+    }
+}
+
 function roundRepoContract(repoFactoryClass) {
     describe("Round Repo Contract", function () {
         let repo
@@ -8,16 +17,13 @@ function roundRepoContract(repoFactoryClass) {
             repo = new repoFactoryClass().roundRepo()
         })
 
-        it("saves rounds", function (done) {
+        it("saves rounds", testAsync(async function () {
             let round = new Round()
 
-            repo.save(round)
-                .then(()=>repo.getAll())
-                .then(rounds=> {
-                    expect(rounds).toContain(round)
-                    done()
-                })
-        })
+            await repo.save(round)
+            let rounds = await repo.getAll()
+            expect(rounds).toContain(round)
+        }))
 
         describe("when there are no rounds", function () {
             it("is empty", function () {
