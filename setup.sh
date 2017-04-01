@@ -31,9 +31,22 @@ npmLinkDependencies() {
     done
 }
 
+compile() {
+    for dir in $1; do
+        pushd $dir
+
+        npm run compile
+        npm run compile-test
+
+        popd
+    done
+}
+
 install "$DEPENDENCIES"
 install "$FRONTENDS"
 
 npmLink "$DEPENDENCIES"
 
 npmLinkDependencies "$FRONTENDS" "$DEPENDENCIES"
+
+compile "$FRONTENDS"
