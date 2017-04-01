@@ -8,7 +8,7 @@ To set up all of the modules (i.e., `npm install` and `npm link` local modules),
 
 ## Running the tests
 
-To run all of the tests, run `./build.sh`
+To run all of the tests, run `./build.sh`. Make sure you've first run `./setup.sh`
 
 ## rps
 
@@ -16,4 +16,4 @@ The rps module contains the high level policy (two use cases: play, and history)
 
 ## webSpecs
 
-This modules exports a contract for the frontend. All frontend implementations conform to the contract. 
+This module exports a contract for the frontend. All frontend implementations conform to the contract. 
