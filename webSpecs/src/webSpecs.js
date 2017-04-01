@@ -107,7 +107,7 @@ function webSpecs(createDOMFixture, mountApp) {
         })
 
         function page() {
-            return document.getElementsByTagName("body")[0].innerText
+            return document.querySelector("body").innerText
         }
 
         function play(p1, p2) {
