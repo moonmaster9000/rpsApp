@@ -1,6 +1,6 @@
 const Round = require("./Round")
 
-function play(p1, p2, ui, repo){
+async function play(p1, p2, ui, repo){
     new RoundUseCase(p1, p2, ui, repo).execute()
 }
 
@@ -15,23 +15,23 @@ function RoundUseCase(p1, p2, ui, repo){
         }
     }
 
-    function recordInvalidRound() {
-        repo.save(new Round(p1, p2, "invalid"))
+    async function recordInvalidRound() {
+        await repo.save(new Round(p1, p2, "invalid"))
         ui.invalid()
     }
 
-    function recordTie() {
-        repo.save(new Round(p1, p2, "tie"))
+    async function recordTie() {
+        await repo.save(new Round(p1, p2, "tie"))
         ui.tie()
     }
 
-    function recordWinner(){
+    async function recordWinner(){
         if (p1BeatsP2()){
-            repo.save(new Round(p1, p2, "p1"))
+            await repo.save(new Round(p1, p2, "p1"))
             ui.p1Wins()
         }
         else {
-            repo.save(new Round(p1, p2, "p2"))
+            await repo.save(new Round(p1, p2, "p2"))
             ui.p2Wins()
         }
     }

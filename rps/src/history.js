@@ -1,8 +1,10 @@
 async function history(ui, repo) {
-    if (await repo.empty()) {
+    let rounds = await repo.getAll()
+    let empty = await repo.empty()
+
+    if (empty) {
         ui.norounds()
     } else {
-        let rounds = await repo.getAll()
         ui.rounds(rounds)
     }
 }

@@ -1,5 +1,6 @@
 const {UseCaseFactory} = require("../src/rps")
 const FakeRepoFactory = require("./../src/FakeRepoFactory")
+const asyncIt = require("./support/asyncIt")
 
 describe("play", function () {
     const ROCK = "rock"
@@ -13,74 +14,75 @@ describe("play", function () {
         useCases = new UseCaseFactory(new FakeRepoFactory())
     }
 
-    it("rock v. rock", function () {
+    asyncIt("rock v. rock", async function () {
         makeSpy("tie")
 
-        useCases.play(ROCK, ROCK, ui)
+        await useCases.play(ROCK, ROCK, ui)
 
         expect(ui.tie).toHaveBeenCalled()
     })
 
-    it("paper v. rock", function () {
+
+    asyncIt("paper v. rock", async function () {
         makeSpy("p1Wins")
 
-        useCases.play(PAPER, ROCK, ui)
+        await useCases.play(PAPER, ROCK, ui)
 
         expect(ui.p1Wins).toHaveBeenCalled()
     })
 
-    it("rock v. paper", function () {
+    asyncIt("rock v. paper", async function () {
         makeSpy("p2Wins")
 
-        useCases.play(ROCK, PAPER, ui)
+        await useCases.play(ROCK, PAPER, ui)
 
         expect(ui.p2Wins).toHaveBeenCalled()
     })
 
-    it("scissors v. paper", function () {
+    asyncIt("scissors v. paper", async function () {
         makeSpy("p1Wins")
 
-        useCases.play(SCISSORS, PAPER, ui)
+        await useCases.play(SCISSORS, PAPER, ui)
 
         expect(ui.p1Wins).toHaveBeenCalled()
     })
 
-    it("paper v. scissors", function () {
+    asyncIt("paper v. scissors", async function () {
         makeSpy("p2Wins")
 
-        useCases.play(PAPER, SCISSORS, ui)
+        await useCases.play(PAPER, SCISSORS, ui)
 
         expect(ui.p2Wins).toHaveBeenCalled()
     })
 
-    it("rock v. scissors", function () {
+    asyncIt("rock v. scissors", async function () {
         makeSpy("p1Wins")
 
-        useCases.play(ROCK, SCISSORS, ui)
+        await useCases.play(ROCK, SCISSORS, ui)
 
         expect(ui.p1Wins).toHaveBeenCalled()
     })
 
-    it("scissors v. rock", function () {
+    asyncIt("scissors v. rock", async function () {
         makeSpy("p2Wins")
 
-        useCases.play(SCISSORS, ROCK, ui)
+        await useCases.play(SCISSORS, ROCK, ui)
 
         expect(ui.p2Wins).toHaveBeenCalled()
     })
 
-    it("sailboat v. rock", function () {
+    asyncIt("sailboat v. rock", async function () {
         makeSpy("invalid")
 
-        useCases.play("sailboat", ROCK, ui)
+        await useCases.play("sailboat", ROCK, ui)
 
         expect(ui.invalid).toHaveBeenCalled()
     })
 
-    it("rock v. sailboat", function(){
+    asyncIt("rock v. sailboat", async function(){
         makeSpy("invalid")
 
-        useCases.play(ROCK, "sailboat", ui)
+        await useCases.play(ROCK, "sailboat", ui)
 
         expect(ui.invalid).toHaveBeenCalled()
     })
