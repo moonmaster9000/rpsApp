@@ -2,6 +2,7 @@
   "name": "angularWeb",
   "version": "0.0.0",
   "dependencies": {
+    "firebasePersist": "file:../firebasePersist",
     "rps": "file:../rps",
     "rpsPresentationI18n": "file:../rpsPresentationI18n",
     "@angular/core" : "4.0.0",
