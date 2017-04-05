@@ -1,0 +1,13 @@
+{
+  "name": "firebasePersist",
+  "version": "0.0.0",
+  "files": ["src/"],
+  "main": "src/firebasePersist.js",
+  "dependencies": {
+    "rps": "file:../rps",
+    "firebase": "~3.7.4"
+  },
+  "devDependencies": {
+    "jasmine": "latest"
+  }
+}
