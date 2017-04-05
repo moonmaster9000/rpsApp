@@ -10,7 +10,7 @@ function roundRepoContract(repoFactoryClass) {
         })
 
         asyncIt("saves rounds", async function () {
-            let round = new Round()
+            let round = new Round("paper")
             await repo.save(round)
 
             let rounds = await repo.getAll()
@@ -26,7 +26,7 @@ function roundRepoContract(repoFactoryClass) {
 
         describe("when there are rounds", function () {
             asyncIt("is not empty", async function () {
-                repo.save(new Round())
+                repo.save(new Round("paper"))
 
                 expect(await repo.empty()).toBe(false)
             })
