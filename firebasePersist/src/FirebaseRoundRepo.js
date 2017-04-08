@@ -2,24 +2,24 @@ const { Round } = require("rps")
 
 function FirebaseRoundRepo(firebase, databaseName){
   this.save = function(round){
-    return new Promise(function(resolve, reject) {
+    return new Promise(function(resolve) {
       const sanitizedRound = stripUndefinedProperties(round)
-      getDatabaseRef().push(sanitizedRound).then(resolve, reject)
+      getDatabaseRef().push(sanitizedRound).then(resolve)
     })
   }
 
   this.empty = function(){
-    return new Promise(function(resolve, reject) {
+    return new Promise(function(resolve) {
       getDatabaseRef().once('value').then(function(snapshot) {
         const savedRounds = snapshot.val();
         const isEmpty = savedRounds === null;
         resolve(isEmpty);
-      }, reject)
+      })
     })
   }
 
   this.getAll = function() {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function(resolve) {
       getDatabaseRef().once('value').then(function (snapshot) {
         let rounds = []
 
