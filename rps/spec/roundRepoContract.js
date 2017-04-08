@@ -9,7 +9,7 @@ function roundRepoContract(repoFactoryClass) {
         })
 
         it("saves rounds", function (done) {
-            let round = new Round()
+            let round = new Round("paper")
 
             repo.save(round)
                 .then(()=>repo.getAll())
@@ -30,7 +30,7 @@ function roundRepoContract(repoFactoryClass) {
 
         describe("when there are rounds", function () {
             it("is not empty", function (done) {
-                repo.save(new Round())
+                repo.save(new Round("paper"))
                     .then(()=>repo.empty())
                     .then((isEmpty)=> {
                         expect(isEmpty).toBeFalsy()
