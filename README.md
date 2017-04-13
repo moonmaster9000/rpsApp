@@ -1,10 +1,13 @@
+
 # rpsApp
 
 This is a simple app that umpires a 2-person rock-paper-scissors games, and also provides a way to see historical results. 
 
 ## Setup
 
-To set up all of the modules (i.e., `npm install` and `npm link` local modules), run `./setup.sh`
+Note that the setup and build scripts depend on the `yarn` package manager (an `npm` replacement). See the [yarn installation guide](https://yarnpkg.com/en/docs/install) if you don't already have yarn installed on your computer.
+
+To set up all of the modules (i.e., `yarn install`, `yarn link`, `yarn run compile`, and `yarn run compile-test`), run `./setup.sh`
 
 ## Running the tests
 
