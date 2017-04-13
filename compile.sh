@@ -5,8 +5,8 @@ for dir in $@; do
 
     mkdir -p bundled
 
-    npm run compile
-    npm run compile-test
+    yarn run compile
+    yarn run compile-test
 
     popd
 done

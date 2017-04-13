@@ -6,25 +6,25 @@ FRONTENDS="web reduxWeb refluxWeb angularWeb"
 install() {
     for dir in $1; do
         pushd $dir
-        npm install
+        yarn
         popd
     done
 }
 
-npmLink() {
+symlinkToGlobalModules() {
     for dir in $1; do
         pushd $dir
-        npm link
+        yarn link
         popd
     done
 }
 
-npmLinkDependencies() {
+symlinkFromGlobalModules() {
     for dir in $1; do
       pushd $dir
 
       for dep in $2; do
-        npm link $dep
+        yarn link $dep
       done
 
       popd
@@ -34,8 +34,8 @@ npmLinkDependencies() {
 install "$DEPENDENCIES"
 install "$FRONTENDS"
 
-npmLink "$DEPENDENCIES"
+symlinkToGlobalModules "$DEPENDENCIES"
 
-npmLinkDependencies "$FRONTENDS" "$DEPENDENCIES"
+symlinkFromGlobalModules "$FRONTENDS" "$DEPENDENCIES"
 
 ./compile.sh ${FRONTENDS}
