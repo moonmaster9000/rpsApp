@@ -6,6 +6,7 @@ module.exports = function (config) {
         frameworks: ['jasmine'],
 
         files: [
+            'node_modules/babel-polyfill/dist/polyfill.min.js',
             'node_modules/reflect-metadata/Reflect.js',
             'node_modules/zone.js/dist/zone.js',
             'bundled/compiledSpec.js'

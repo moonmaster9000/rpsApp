@@ -15,7 +15,8 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'bundled/compiledSpec.js'
+      'node_modules/babel-polyfill/dist/polyfill.min.js',
+      'bundled/compiledSpec.js',
     ],
 
 
