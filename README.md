@@ -11,7 +11,7 @@ To set up all of the modules (i.e., `yarn install`, `yarn link`, `yarn run compi
 
 ## Running the tests
 
-To run all of the tests, run `./build.sh`. Make sure you've first run `./setup.sh`
+To run all of the tests, run `./build.sh`. Make sure you've first run `./setup.sh`. Note that the UI components are tested via a Chrome karma runner, so you'll need to install Chrome if you don't already have it on your computer. 
 
 ## rps
 
