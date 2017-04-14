@@ -7,20 +7,21 @@
     "react-redux": "latest",
     "redux": "latest",
     "rps": "file:../rps",
-    "rpsPresentationI18n": "file:../rpsPresentationI18n"
+    "rpsPresentationI18n": "file:../rpsPresentationI18n",
+    "babel-polyfill": "latest"
   },
   "devDependencies": {
     "babelify": "latest",
     "babel-preset-es2015": "latest",
+    "babel-plugin-transform-async-to-generator": "latest",
     "babel-preset-react": "latest",
-    "babel-preset-stage-2": "latest",
     "webSpecs": "file:../webSpecs",
     "karma": "^1.5.0",
     "karma-chrome-launcher": "^2.0.0",
     "karma-jasmine": "^1.1.0"
   },
   "scripts": {
-    "compile": "browserify main.js -o bundled/main.js -t [ babelify --presets [ es2015 react stage-2 ] ]",
-    "compile-test": "browserify spec/webSpec.js -o bundled/compiledSpec.js -t [ babelify --presets [ es2015 react stage-2 ] ]"
+    "compile": "browserify main.js -o bundled/main.js -t [ babelify --presets [ es2015 react ] --plugins [ transform-async-to-generator ] ]",
+    "compile-test": "browserify spec/webSpec.js -o bundled/compiledSpec.js -t [ babelify --presets [ es2015 react ] --plugins [ transform-async-to-generator ] ]"
   }
 }

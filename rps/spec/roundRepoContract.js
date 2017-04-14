@@ -1,4 +1,5 @@
 const Round = require("../src/Round")
+const asyncIt = require("./support/asyncIt")
 
 function roundRepoContract(repoFactoryClass) {
     describe("Round Repo Contract", function () {
@@ -8,34 +9,26 @@ function roundRepoContract(repoFactoryClass) {
             repo = new repoFactoryClass().roundRepo()
         })
 
-        it("saves rounds", function (done) {
+        asyncIt("saves rounds", async function () {
             let round = new Round()
+            await repo.save(round)
 
-            repo.save(round)
-                .then(()=>repo.getAll())
-                .then(rounds=> {
-                    expect(rounds).toContain(round)
-                    done()
-                })
+            let rounds = await repo.getAll()
+
+            expect(rounds).toContain(round)
         })
 
         describe("when there are no rounds", function () {
-            it("is empty", function () {
-                repo.empty()
-                    .then((isEmpty)=> {
-                        expect(isEmpty).toBe(true)
-                    })
+            asyncIt("is empty", async function () {
+                expect(await repo.empty()).toBe(true)
             })
         })
 
         describe("when there are rounds", function () {
-            it("is not empty", function (done) {
+            asyncIt("is not empty", async function () {
                 repo.save(new Round())
-                    .then(()=>repo.empty())
-                    .then((isEmpty)=> {
-                        expect(isEmpty).toBeFalsy()
-                        done()
-                    })
+
+                expect(await repo.empty()).toBe(false)
             })
         })
     })

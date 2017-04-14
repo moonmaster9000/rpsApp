@@ -12,18 +12,20 @@
       "zone.js": "^0.8.4",
       "reflect-metadata": "latest",
     "@angular/platform-browser-dynamic": "4.0.0",
-    "@angular/forms": "4.0.0"
+    "@angular/forms": "4.0.0",
+    "babel-polyfill": "latest"
   },
   "devDependencies": {
     "webSpecs": "../webSpecs",
     "babelify": "latest",
     "babel-preset-es2015": "latest",
+    "babel-plugin-transform-async-to-generator": "latest",
     "karma": "^1.5.0",
     "karma-chrome-launcher": "^2.0.0",
     "karma-jasmine": "^1.1.0"
   },
   "scripts": {
-    "compile": "browserify -o bundled/compiled_main.js main.js -t [ babelify --presets [ es2015 ] ]",
-    "compile-test": "browserify -o bundled/compiledSpec.js spec/RPSAppSpec.js -t [ babelify --presets [ es2015 ] ]"
+    "compile": "browserify main.js -o bundled/compiled_main.js -t [ babelify --presets [ es2015 ] --plugins [ transform-async-to-generator ] ]",
+    "compile-test": "browserify spec/RPSAppSpec.js -o bundled/compiledSpec.js -t [ babelify --presets [ es2015 ] --plugins [ transform-async-to-generator ] ]"
   }
 }

@@ -1,6 +1,7 @@
 const {UseCaseFactory} = require("../src/rps")
 const Round = require("../src/Round")
 const FakeRepoFactory = require("./../src/FakeRepoFactory")
+const asyncIt = require("./support/asyncIt")
 
 describe("history", function () {
     let ui, useCases, repoFactory
@@ -11,34 +12,28 @@ describe("history", function () {
         useCases = new UseCaseFactory(repoFactory)
     })
 
-    it("given folks have played before", function(done){
-        useCases.play("rock", "paper", ui)
-        useCases.play("paper", "paper", ui)
-        useCases.play("scissors", "paper", ui)
-        useCases.play("sailboat", "paper", ui)
+    asyncIt("given folks have played before", async function () {
+        await Promise.all([
+            useCases.play("rock", "paper", ui),
+            useCases.play("paper", "paper", ui),
+            useCases.play("scissors", "paper", ui),
+            useCases.play("sailboat", "paper", ui),
+        ])
 
-        useCases.history(ui)
+        await useCases.history(ui)
 
-        tick(()=>{
-            expect(ui.rounds).toHaveBeenCalledWith([
-                new Round("rock", "paper", "p2"),
-                new Round("paper", "paper", "tie"),
-                new Round("scissors", "paper", "p1"),
-                new Round("sailboat", "paper", "invalid"),
-            ])
-
-            done()
-        })
+        expect(ui.rounds).toHaveBeenCalledWith([
+            new Round("rock", "paper", "p2"),
+            new Round("paper", "paper", "tie"),
+            new Round("scissors", "paper", "p1"),
+            new Round("sailboat", "paper", "invalid"),
+        ])
     })
 
-    it("given no one has played before", function (done) {
-        useCases.history(ui)
 
-        tick(()=> {
-            expect(ui.norounds).toHaveBeenCalled()
-            done()
-        })
+    asyncIt("given no one has played before", async function () {
+        let val = await useCases.history(ui)
+
+        expect(ui.norounds).toHaveBeenCalled()
     })
-
-    const tick = (f) => setTimeout(f, 0)
 })

@@ -2,8 +2,28 @@
   "name": "rps",
   "version": "0.0.0",
   "main": "src/rps.js",
-  "files": ["src/"],
+  "files": [
+    "src/"
+  ],
   "devDependencies": {
-    "jasmine": "latest"
+    "jasmine": "latest",
+    "babel-preset-es2015": "latest",
+    "babel-plugin-transform-async-to-generator": "latest",
+    "babelify": "latest"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "presets": [
+            "es2015"
+          ],
+          "plugins": [
+            "transform-async-to-generator"
+          ]
+        }
+      ]
+    ]
   }
 }

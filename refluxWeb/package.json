@@ -6,11 +6,13 @@
     "rpsPresentationI18n": "file:../rpsPresentationI18n",
     "react": "latest",
     "react-dom": "latest",
-    "reflux": "latest"
+    "reflux": "latest",
+    "babel-polyfill": "latest"
   },
   "devDependencies": {
     "babelify": "latest",
     "babel-preset-es2015": "latest",
+    "babel-plugin-transform-async-to-generator": "latest",
     "babel-preset-react": "latest",
     "webSpecs": "file:../webSpecs",
     "karma": "^1.5.0",
@@ -18,7 +20,7 @@
     "karma-jasmine": "^1.1.0"
   },
   "scripts": {
-    "compile": "browserify main.js -o bundled/compiled_main.js -t [ babelify --presets [ es2015 react ] ]",
-    "compile-test": "browserify spec/RPSAppSpec.js -o bundled/compiledSpec.js -t [ babelify --presets [ es2015 react ] ]"
+    "compile": "browserify main.js -o bundled/compiled_main.js -t [ babelify --presets [ es2015 react ] --plugins [ transform-async-to-generator ] ]",
+    "compile-test": "browserify spec/RPSAppSpec.js -o bundled/compiledSpec.js -t [ babelify --presets [ es2015 react ] --plugins [ transform-async-to-generator ] ]"
   }
 }
