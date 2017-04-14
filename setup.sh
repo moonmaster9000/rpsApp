@@ -37,5 +37,6 @@ install "$FRONTENDS"
 symlinkToGlobalModules "$DEPENDENCIES"
 
 symlinkFromGlobalModules "$FRONTENDS" "$DEPENDENCIES"
+symlinkFromGlobalModules "webSpecs" "rps rpsPresentationI18n"
 
 ./compile.sh ${FRONTENDS}
