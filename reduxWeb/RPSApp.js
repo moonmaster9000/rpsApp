@@ -11,57 +11,57 @@ let RoundHistory = ({rounds}) => {
     </ul>
 }
 
-let RPSApp = React.createClass({
+class RPSApp extends React.Component {
     componentWillMount(){
         this.props.useCases.history(this)
-    },
+    }
 
     rounds(rs){
         this.props.dispatch({type: 'ROUNDS', rounds: rs})
-    },
+    }
 
     tie(){
         this.props.dispatch({type: 'TIE'})
         this.props.useCases.history(this)
-    },
+    }
 
     p2Wins(){
         this.props.dispatch({type: 'P2_WINS'})
         this.props.useCases.history(this)
-    },
+    }
 
     p1Wins(){
         this.props.dispatch({type: 'P1_WINS'})
         this.props.useCases.history(this)
-    },
+    }
 
     invalid(){
         this.props.dispatch({type: 'INVALID'})
         this.props.useCases.history(this)
-    },
+    }
 
     handleP1InputChange (e) {
         e.preventDefault()
         this.props.dispatch({type: 'P1_CHANGED', text: e.target.value})
-    },
+    }
 
     handleP2InputChange (e) {
         e.preventDefault()
         this.props.dispatch({type: 'P2_CHANGED', text: e.target.value})
-    },
+    }
 
     submitHandler (e) {
         e.preventDefault()
         this.props.useCases.play(this.props.p1, this.props.p2, this)
-    },
+    }
 
     render(){
         return <div>
             {this.props.gameResult}
 
-            <form onSubmit={this.submitHandler}>
-                <input type="text" name="p1" id="p1ThrowInput" onChange={this.handleP1InputChange}/>
-                <input type="text" name="p2" id="p2ThrowInput" onChange={this.handleP2InputChange}/>
+            <form onSubmit={this.submitHandler.bind(this)}>
+                <input type="text" name="p1" id="p1ThrowInput" onChange={this.handleP1InputChange.bind(this)}/>
+                <input type="text" name="p2" id="p2ThrowInput" onChange={this.handleP2InputChange.bind(this)}/>
 
                 <input id="playButton" type="submit" value="PLAY"/>
             </form>
@@ -69,7 +69,7 @@ let RPSApp = React.createClass({
             {this.props.roundHistory}
         </div>
     }
-})
+}
 
 function mapStateToProps(state) {
     return state
