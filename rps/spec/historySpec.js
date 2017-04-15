@@ -1,7 +1,7 @@
 const {UseCaseFactory} = require("../src/rps")
 const Round = require("../src/Round")
 const FakeRepoFactory = require("./../src/FakeRepoFactory")
-const asyncIt = require("./support/asyncIt")
+const asyncIt = require("./../src/rps/contracts/asyncIt")
 
 describe("history", function () {
     let ui, useCases, repoFactory

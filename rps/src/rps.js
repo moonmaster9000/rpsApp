@@ -2,6 +2,7 @@ const play = require("./play")
 const history = require("./history")
 const FakeRepoFactory = require("./FakeRepoFactory")
 const Round = require("./Round")
+const roundRepoContract = require("./rps/contracts/roundRepoContract")
 
 function UseCaseFactory(repoFactory){
     this.play = async function(p1, p2, ui){
@@ -17,4 +18,5 @@ module.exports = {
     UseCaseFactory,
     FakeRepoFactory,
     Round,
+    roundRepoContract
 }

@@ -1,6 +1,6 @@
 const {UseCaseFactory} = require("../src/rps")
 const FakeRepoFactory = require("./../src/FakeRepoFactory")
-const asyncIt = require("./support/asyncIt")
+const asyncIt = require("./../src/rps/contracts/asyncIt")
 
 describe("play", function () {
     const ROCK = "rock"

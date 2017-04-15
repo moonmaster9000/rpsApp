@@ -1,5 +1,5 @@
-const Round = require("../src/Round")
-const asyncIt = require("./support/asyncIt")
+const Round = require("../../Round")
+const asyncIt = require("./asyncIt")
 
 function roundRepoContract(repoFactoryClass) {
     describe("Round Repo Contract", function () {
