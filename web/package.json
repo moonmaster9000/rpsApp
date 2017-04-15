@@ -4,6 +4,7 @@
   "dependencies": {
     "rps": "file:../rps",
     "rpsPresentationI18n": "file:../rpsPresentationI18n",
+    "pouchPersist": "file:../pouchPersist",
     "react": "latest",
     "react-dom": "latest",
     "babel-polyfill": "latest"
