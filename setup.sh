@@ -33,10 +33,14 @@ symlinkFromGlobalModules() {
 
 install "$DEPENDENCIES"
 install "$FRONTENDS"
+install "pouchPersist"
 
 symlinkToGlobalModules "$DEPENDENCIES"
+symlinkToGlobalModules "pouchPersist"
 
 symlinkFromGlobalModules "$FRONTENDS" "$DEPENDENCIES"
 symlinkFromGlobalModules "webSpecs" "rps rpsPresentationI18n"
+symlinkFromGlobalModules "pouchPersist" "rps"
+symlinkFromGlobalModules "web" "pouchPersist"
 
 ./compile.sh ${FRONTENDS}
