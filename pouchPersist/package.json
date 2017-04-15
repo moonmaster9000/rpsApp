@@ -1,0 +1,13 @@
+{
+  "name": "pouchPersist",
+  "version": "0.0.0",
+  "main": "src/pouchPersist",
+  "files": ["src/"],
+  "dependencies": {
+    "pouchdb": "latest"
+  },
+  "devDependencies": {
+    "jasmine": "latest",
+    "rps": "file:../rps"
+  }
+}
