@@ -1,4 +1,4 @@
-const roundRepoContract = require("rps/spec/roundRepoContract")
+const { roundRepoContract } = require("rps")
 const provideFirebaseRepoFactory = require("./../src/FirebaseRepoFactory")
 
 roundRepoContract(provideFirebaseRepoFactory(
