@@ -19,13 +19,14 @@ class RPSApp extends React.Component {
         return this.props.useCases  
     }
 
-    componentWillMount(){
+    componentDidMount(){
         this.useCases().history(this)
     }
 
-    submitRound(e){
+    async submitRound(e) {
         e.preventDefault()
-        this.useCases().play(this.state.p1, this.state.p2, this)
+        await this.useCases().play(this.state.p1, this.state.p2, this)
+        this.useCases().history(this)
     }
 
     p1Changed(e){
@@ -37,7 +38,6 @@ class RPSApp extends React.Component {
     }
 
     invalid(){
-        this.useCases().history(this)
         this.setState({errors: locale.t("invalid"), winner: null})
     }
 
@@ -51,17 +51,14 @@ class RPSApp extends React.Component {
     }
 
     p1Wins(){
-        this.useCases().history(this)
         this.assignWinner("p1")
     }
 
     p2Wins(){
-        this.useCases().history(this)
         this.assignWinner("p2")
     }
 
     tie(){
-        this.useCases().history(this)
         this.clearErrors()
         this.setState({winner: <h1>{locale.t("tie")}</h1>})
     }
