@@ -1,0 +1,24 @@
+{
+  "name": "vueWeb",
+  "version": "0.0.0",
+  "dependencies": {
+    "babel-polyfill": "^6.23.0",
+    "vue": "^2.3.4"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babelify": "^7.3.0",
+    "karma": "^1.7.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-jasmine": "^1.1.0",
+    "rps": "file:../rps",
+    "rpsPresentationI18n": "file:../rpsPresentationI18n",
+    "vueify": "^9.4.1",
+    "webSpecs": "file:../webSpecs"
+  },
+  "scripts": {
+    "compile": "browserify main.js -o bundled/main.js -t [ babelify --presets [ es2015 ] --plugins [ transform-async-to-generator ] ] -t [ vueify ]",
+    "compile-test": "browserify spec/webSpec.js -o bundled/compiledSpec.js -t [ babelify --presets [ es2015 ] --plugins [ transform-async-to-generator ] ] -t [ vueify ]"
+  }
+}

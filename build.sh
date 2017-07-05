@@ -1,6 +1,6 @@
 pushd rps && node_modules/jasmine/bin/jasmine.js && popd
 
-FRONTENDS="web angularWeb refluxWeb reduxWeb"
+FRONTENDS="web angularWeb refluxWeb reduxWeb vueWeb"
 
 for frontend in $FRONTENDS; do
     pushd $frontend
