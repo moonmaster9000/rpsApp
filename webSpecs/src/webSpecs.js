@@ -1,7 +1,8 @@
 const {Round} = require("rps")
 const Locale = require("rpsPresentationI18n")
 
-function webSpecs(createDOMFixture, mountApp) {
+function webSpecs(createDOMFixture, mountApp, teardown = () => {}) {
+
     describe("play", function () {
         let locale, fixture
 
@@ -33,10 +34,10 @@ function webSpecs(createDOMFixture, mountApp) {
                 }, done)
             })
 
-            it("tells the user the input is invalid", function () {
+            it("tells the user the input is invalid", function (done) {
                 expect(page()).not.toContain(t("invalid"))
                 play()
-                expect(page()).toContain(t("invalid"))
+                whenPageUpdates(() => expect(page()).toContain(t("invalid")), done)
             })
         })
 
@@ -49,10 +50,10 @@ function webSpecs(createDOMFixture, mountApp) {
                 }, done)
             })
 
-            it("tells the user P1 Wins!", function () {
+            it("tells the user P1 Wins!", function (done) {
                 expect(page()).not.toContain(t("p1_wins"))
                 play()
-                expect(page()).toContain(t("p1_wins"))
+                whenPageUpdates(() => expect(page()).toContain(t("p1_wins")), done)
             })
         })
 
@@ -65,10 +66,10 @@ function webSpecs(createDOMFixture, mountApp) {
                 }, done)
             })
 
-            it("tells the user P2 Wins!", function () {
+            it("tells the user P2 Wins!", function (done) {
                 expect(page()).not.toContain(t("p2_wins"))
                 play()
-                expect(page()).toContain(t("p2_wins"))
+                whenPageUpdates(() => expect(page()).toContain(t("p2_wins")), done)
             })
         })
 
@@ -81,10 +82,10 @@ function webSpecs(createDOMFixture, mountApp) {
                 }, done)
             })
 
-            it("tells the user TIE!", function () {
+            it("tells the user TIE!", function (done) {
                 expect(page()).not.toContain(t("tie"))
                 play()
-                expect(page()).toContain(t("tie"))
+                whenPageUpdates(() => expect(page()).toContain(t("tie")), done)
             })
         })
 
@@ -99,10 +100,12 @@ function webSpecs(createDOMFixture, mountApp) {
                 }, done)
             })
 
-            it("shows those rounds on the page", function () {
-                expect(page()).toContain(round.p1Throw)
-                expect(page()).toContain(round.p2Throw)
-                expect(page()).toContain(round.winner)
+            it("shows those rounds on the page", function (done) {
+                whenPageUpdates(() => {
+                    expect(page()).toContain(round.p1Throw)
+                    expect(page()).toContain(round.p2Throw)
+                    expect(page()).toContain(round.winner)
+                }, done)
             })
         })
 
@@ -147,14 +150,19 @@ function webSpecs(createDOMFixture, mountApp) {
             return locale.t(key)
         }
 
-        function renderApp(useCases, done = ()=> {
-        }) {
+        function renderApp(useCases, done = ()=> {}) {
             useCases.history = useCases.history || function () {}
             useCases.play = useCases.play || function () {}
 
             mountApp(useCases)
 
-            setTimeout(done, 0)
+            setTimeout(() => {
+                done()
+            }, 0)
+        }
+
+        function whenPageUpdates(assertion, done) {
+            setTimeout(() => { assertion(); done() }, 0)
         }
 
         beforeEach(function () {
@@ -165,6 +173,7 @@ function webSpecs(createDOMFixture, mountApp) {
 
         afterEach(function () {
             fixture.remove()
+            teardown()
         })
     })
 }

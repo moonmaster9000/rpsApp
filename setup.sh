@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 DEPENDENCIES="rps rpsPresentationI18n webSpecs"
-FRONTENDS="web reduxWeb refluxWeb angularWeb"
+FRONTENDS="web reduxWeb refluxWeb angularWeb vueWeb"
 
 install() {
     for dir in $1; do
