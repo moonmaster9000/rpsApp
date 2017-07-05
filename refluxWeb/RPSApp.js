@@ -53,6 +53,10 @@ class RPSApp extends Reflux.Component {
     }
 
     componentDidMount(){
+        this.updateHistory()
+    }
+
+    updateHistory() {
         this.props.useCases.history(this)
     }
 
@@ -63,22 +67,30 @@ class RPSApp extends Reflux.Component {
 
     p1Wins() {
         p1WinsAction()
+        this.updateHistory()
     }
 
     p2Wins() {
         p2WinsAction()
+        this.updateHistory()
     }
 
     tie() {
         tieAction()
+        this.updateHistory()
     }
 
     invalid() {
         invalidInputAction()
+        this.updateHistory()
     }
 
     rounds(rs) {
         roundsFoundAction(rs)
+    }
+
+    norounds() {
+        roundsFoundAction([])
     }
 
     render() {

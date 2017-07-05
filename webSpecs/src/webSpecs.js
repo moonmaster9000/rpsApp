@@ -106,6 +106,22 @@ function webSpecs(createDOMFixture, mountApp) {
             })
         })
 
+        describe("when the history returns no results", function () {
+            let round
+
+            beforeEach(function (done) {
+                round = new Round("p1's Throw", "p2's Throw", "round winner")
+
+                renderApp({
+                    history: ui=>ui.norounds()
+                }, done)
+            })
+
+            it("shows nothing", function () {
+                // no errors thrown
+            })
+        })
+
         function page() {
             return document.querySelector("body").innerText
         }

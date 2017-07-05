@@ -16,6 +16,10 @@ class RPSApp extends React.Component {
         this.props.useCases.history(this)
     }
 
+    norounds(rs){
+        this.props.dispatch({type: 'NO_ROUNDS'})
+    }
+
     rounds(rs){
         this.props.dispatch({type: 'ROUNDS', rounds: rs})
     }
@@ -103,6 +107,8 @@ const p2 = (state = '', action) => {
 
 const roundHistory = (state = 'NO ROUNDS', action) => {
     switch (action.type) {
+        case 'NO_ROUNDS':
+            return 'NO ROUNDS'
         case 'ROUNDS':
             return <RoundHistory rounds={action.rounds}/>
         default:
