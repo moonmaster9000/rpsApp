@@ -22,7 +22,8 @@
     "babel-plugin-transform-async-to-generator": "latest",
     "karma": "^1.5.0",
     "karma-chrome-launcher": "^2.0.0",
-    "karma-jasmine": "^1.1.0"
+    "karma-jasmine": "^1.1.0",
+    "browserify": "latest"
   },
   "scripts": {
     "compile": "browserify main.js -o bundled/compiled_main.js -t [ babelify --presets [ es2015 ] --plugins [ transform-async-to-generator ] ]",
