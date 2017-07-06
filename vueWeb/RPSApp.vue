@@ -43,28 +43,25 @@ module.exports = {
         this.useCases.history(this)
     },
 
-    onSubmit(e){
-        this.useCases.play(this.p1, this.p2, this)
+    async onSubmit(e){
+        await this.useCases.play(this.p1, this.p2, this)
+        this.updateHistory()
     },
 
     invalid(){
         this.message = this.locale.t("invalid")
-        this.updateHistory()
     },
 
     p1Wins(){
         this.message = this.locale.t("p1_wins")
-        this.updateHistory()
     },
 
     p2Wins(){
         this.message = this.locale.t("p2_wins")
-        this.updateHistory()
     },
 
     tie(){
         this.message = this.locale.t("tie")
-        this.updateHistory()
     },
 
     rounds(rs){
