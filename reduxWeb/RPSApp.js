@@ -26,22 +26,18 @@ class RPSApp extends React.Component {
 
     tie(){
         this.props.dispatch({type: 'TIE'})
-        this.props.useCases.history(this)
     }
 
     p2Wins(){
         this.props.dispatch({type: 'P2_WINS'})
-        this.props.useCases.history(this)
     }
 
     p1Wins(){
         this.props.dispatch({type: 'P1_WINS'})
-        this.props.useCases.history(this)
     }
 
     invalid(){
         this.props.dispatch({type: 'INVALID'})
-        this.props.useCases.history(this)
     }
 
     handleP1InputChange (e) {
@@ -54,9 +50,10 @@ class RPSApp extends React.Component {
         this.props.dispatch({type: 'P2_CHANGED', text: e.target.value})
     }
 
-    submitHandler (e) {
+    async submitHandler (e) {
         e.preventDefault()
-        this.props.useCases.play(this.props.p1, this.props.p2, this)
+        await this.props.useCases.play(this.props.p1, this.props.p2, this)
+        this.props.useCases.history(this)
     }
 
     render(){

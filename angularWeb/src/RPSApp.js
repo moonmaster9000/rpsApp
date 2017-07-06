@@ -32,29 +32,26 @@ const RPSApp = Component({
         this.useCases.history(this)
     },
 
-    onSubmit(e){
+    async onSubmit(e){
         e.preventDefault()
-        this.useCases.play(this.model.p1, this.model.p2, this)
+        await this.useCases.play(this.model.p1, this.model.p2, this)
+        updateHistory()
     },
 
     invalid(){
         this.message = this.locale.t("invalid")
-        this.updateHistory()
     },
 
     p1Wins(){
         this.message = this.locale.t("p1_wins")
-        this.updateHistory()
     },
 
     p2Wins(){
         this.message = this.locale.t("p2_wins")
-        this.updateHistory()
     },
 
     tie(){
         this.message = this.locale.t("tie")
-        this.updateHistory()
     },
 
     rounds(rs){

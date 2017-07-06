@@ -56,33 +56,26 @@ class RPSApp extends Reflux.Component {
         this.updateHistory()
     }
 
-    updateHistory() {
-        this.props.useCases.history(this)
-    }
-
-    submitHandler(e) {
+    async submitHandler(e) {
         e.preventDefault()
-        this.props.useCases.play(document.getElementById("p1ThrowInput").value, document.getElementById("p2ThrowInput").value, this)
+        await this.props.useCases.play(document.getElementById("p1ThrowInput").value, document.getElementById("p2ThrowInput").value, this)
+        this.props.useCases.history(this)
     }
 
     p1Wins() {
         p1WinsAction()
-        this.updateHistory()
     }
 
     p2Wins() {
         p2WinsAction()
-        this.updateHistory()
     }
 
     tie() {
         tieAction()
-        this.updateHistory()
     }
 
     invalid() {
         invalidInputAction()
-        this.updateHistory()
     }
 
     rounds(rs) {
