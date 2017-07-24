@@ -20,8 +20,8 @@ function webSpecs(createDOMFixture, mountApp, teardown = () => {}) {
                 })
             })
 
-            it("sends the text inputs for p1 and p2 throws to the play function", function () {
-                expect(playSpy.calls.mostRecent().args).toContain(p1Throw, p2Throw)
+            it("sends the text inputs for p1 and p2 throws to the play function", function (done) {
+                whenPageUpdates(() => expect(playSpy.calls.mostRecent().args).toContain(p1Throw, p2Throw), done)
             })
         })
 
@@ -162,7 +162,7 @@ function webSpecs(createDOMFixture, mountApp, teardown = () => {}) {
         }
 
         function whenPageUpdates(assertion, done) {
-            setTimeout(() => { assertion(); done() }, 0)
+            setTimeout(() => { assertion(); done() }, 20)
         }
 
         beforeEach(function () {
