@@ -59,6 +59,10 @@ class RPSApp extends Reflux.Component {
     async submitHandler(e) {
         e.preventDefault()
         await this.props.useCases.play(document.getElementById("p1ThrowInput").value, document.getElementById("p2ThrowInput").value, this)
+        this.updateHistory()
+    }
+
+    updateHistory(){
         this.props.useCases.history(this)
     }
 
