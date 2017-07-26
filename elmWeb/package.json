@@ -19,9 +19,9 @@
     "webSpecs": "file:../webSpecs"
   },
   "scripts": {
-    "precompile": "elm make src/Main.elm --output bundled/ElmWeb.js",
+    "precompile": "elm make src/Main.elm --output bundled/ElmWeb.js --yes",
     "compile": "browserify main.js -o bundled/main.js -t [ babelify --presets [ es2015 ] --plugins [ transform-async-to-generator ] ]",
-    "precompile-test": "elm make src/Main.elm --output bundled/ElmWeb.js",
+    "precompile-test": "elm make src/Main.elm --output bundled/ElmWeb.js --yes",
     "compile-test": "browserify spec/webSpec.js -o bundled/compiledSpec.js -t [ babelify --presets [ es2015 ] --plugins [ transform-async-to-generator ] ]"
   }
 }
